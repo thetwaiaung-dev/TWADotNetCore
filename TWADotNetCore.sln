@@ -1,0 +1,47 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.34031.279
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TWADotNetCore.ConsoleApp", "TWADotNetCore\TWADotNetCore.ConsoleApp.csproj", "{0D33CA69-DCF2-4A73-AFA0-807D203A1697}"
+	ProjectSection(ProjectDependencies) = postProject
+		{002D187C-3068-4591-BA6E-DECDF5E4D4DE} = {002D187C-3068-4591-BA6E-DECDF5E4D4DE}
+		{85480CC4-228B-46C6-BCF0-EB9FF74463A5} = {85480CC4-228B-46C6-BCF0-EB9FF74463A5}
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TWADotNetCore.RestApi", "TWADotNetCore.RestApi\TWADotNetCore.RestApi.csproj", "{002D187C-3068-4591-BA6E-DECDF5E4D4DE}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TWADotNetCore.MVC", "TWADotNetCore.MVC\TWADotNetCore.MVC.csproj", "{85480CC4-228B-46C6-BCF0-EB9FF74463A5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TWADotNetCore.WindowFormApp", "TWADotNetCore.WindowFormApp\TWADotNetCore.WindowFormApp.csproj", "{87FFF7F3-1F9E-435A-B8AB-CC5098B954ED}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0D33CA69-DCF2-4A73-AFA0-807D203A1697}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0D33CA69-DCF2-4A73-AFA0-807D203A1697}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0D33CA69-DCF2-4A73-AFA0-807D203A1697}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0D33CA69-DCF2-4A73-AFA0-807D203A1697}.Release|Any CPU.Build.0 = Release|Any CPU
+		{002D187C-3068-4591-BA6E-DECDF5E4D4DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{002D187C-3068-4591-BA6E-DECDF5E4D4DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{002D187C-3068-4591-BA6E-DECDF5E4D4DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{002D187C-3068-4591-BA6E-DECDF5E4D4DE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{85480CC4-228B-46C6-BCF0-EB9FF74463A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{85480CC4-228B-46C6-BCF0-EB9FF74463A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{85480CC4-228B-46C6-BCF0-EB9FF74463A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{85480CC4-228B-46C6-BCF0-EB9FF74463A5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{87FFF7F3-1F9E-435A-B8AB-CC5098B954ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{87FFF7F3-1F9E-435A-B8AB-CC5098B954ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{87FFF7F3-1F9E-435A-B8AB-CC5098B954ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{87FFF7F3-1F9E-435A-B8AB-CC5098B954ED}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {CA107A33-4DF7-4876-BA99-46AB6ADADD6D}
+	EndGlobalSection
+EndGlobal

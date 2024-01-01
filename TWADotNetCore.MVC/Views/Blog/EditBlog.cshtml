@@ -1,0 +1,25 @@
+﻿@model BlogDto;
+@{
+    ViewData["Title"] = "Get Blog";
+}
+
+<partial name="_ValidationMessage" />
+
+<div class="container">
+    <form asp-controller="Blog" asp-action="UpdateBlog" asp-route-id="@Model.Blog_Id" method="post">
+        <div class="mb-3">
+            <label>Blog Title</label>
+            <input asp-for="@Model.Blog_Title" class="form-control" type="text" />
+        </div>
+        <div class="mb-3">
+            <label>Blog Author</label>
+            <input asp-for="@Model.Blog_Author" class="form-control" type="text" />
+        </div>
+        <div class="mb-3">
+            <label>Blog Content</label>
+            <input asp-for="@Model.Blog_Content" class="form-control" type="text" />
+        </div>
+        <a asp-controller="Blog" asp-action="index"><button type="button" class="btn btn-secondary">Cancel</button></a>
+        <button type="submit" class="btn btn-success">Save</button>
+    </form>
+</div>

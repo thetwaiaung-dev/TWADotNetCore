@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dot Net Core</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <!--icheck radio button-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/icheck-bootstrap/3.0.1/icheck-bootstrap.min.css"
+    integrity="sha512-8vq2g5nHE062j3xor4XxPeZiPjmRDh6wlufQlfC6pdQ/9urJkU07NM0tEREeymP++NczacJ/Q59ul+/K2eYvcg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <!--ladda link-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ladda-bootstrap/0.9.4/ladda-themeless.min.css">
+</head>
+
+<body class="w-100 h-100">
+
+  <nav class="navbar navbar-expand-lg bg-secondary sticky-top">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Blog</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Link</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Dropdown
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">Action</a></li>
+              <li><a class="dropdown-item" href="#">Another action</a></li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li><a class="dropdown-item" href="#">Something else here</a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link disabled">Disabled</a>
+          </li>
+        </ul>
+        <form class="d-flex" role="search">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-primary" type="submit">Search</button>
+        </form>
+      </div>
+    </div>
+  </nav>
+
+  <div class=" container-fluid row w-100 mt-5 ">
+    <div class=" col-md-6 w-50">
+      <h2>Blog</h2>
+      <div class="mb-3 row mt-5 w-75">
+        <label class="col-md-3 mb-2">Blog Title</label>
+        <input class="col form-control" type="text" id="blogTitle" />
+      </div>
+      <div class="mb-3 row mt-5 w-75 ">
+        <label class="col-md-3 mb-2">Blog Author</label>
+        <input class="col  form-control" type="text" id="blogAuthor" />
+      </div>
+      <div class="mb-3 row mt-5 w-75">
+        <label class="col-md-3 mb-2">Blog Content</label>
+        <input class="col form-control" type="text" id="blogContent" />
+      </div>
+      <div class="row mb-3 mt-5 w-75">
+        <label class="col-md-3 mb-2"></label>
+        <div class="col">
+          <div class="icheck-primary icheck-inline">
+            <input type="radio" id="ch1" name="status" value="true" />
+            <label for="ch1">Public</label>
+          </div>
+          <div class="icheck-primary icheck-inline">
+            <input type="radio" id="ch2" name="status" value="false" />
+            <label for="ch2">Only Me</label>
+          </div>
+        </div>
+      </div>
+      <div class="mb-3 row mt-5 w-75">
+        <label class="col-md-3 mb-2"></label>
+        <button class="col-md-2 btn btn-success ladda-button" data-style="expand-left" type="button"
+          id="btnClick">Save</button>
+        <button class="col-md-2 btn btn-primary" type="button" id="update-btn">Update</button>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <table class="table table-light table-hover">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Blog Title</th>
+            <th scope="col">Blog Author</th>
+            <th scope="col">Blog Content</th>
+            <th scope="col">Blog Status</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody id="blog-tbl">
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+    integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+    crossorigin="anonymous"></script>
+  <!--Sweet alert-->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <!--Ladda-->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ladda-bootstrap/0.9.4/spin.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ladda-bootstrap/0.9.4/ladda.min.js"></script>
+
+  <script>
+    let editId = '';
+    loadBlogTable();
+
+    //ladda create
+    var l = Ladda.create(document.querySelector('.ladda-button'));
+
+    $('#btnClick').click(() => {
+      l.start();
+      var blogId = getUUID();
+      var blogTitle = $('#blogTitle').val();
+      var blogAuthor = $('#blogAuthor').val();
+      var blogContent = $('#blogContent').val();
+      var blogStatus = $("input[name='status']:checked").val() === 'true' ?
+        'Public' : 'Only Me';
+
+      if (blogTitle === null || blogTitle === '' || blogTitle.trim() === '' || blogAuthor === null || blogAuthor === '' ||
+        blogAuthor.trim() === '' || blogContent === null || blogContent === '' || blogContent.trim() == '') {
+        warningAlert("Blog fields is required.");
+        setTimeout(() => {
+          l.stop();
+        }, 2000);
+        return;
+      }
+
+      let blog = {
+        BlogId: blogId,
+        BlogTitle: blogTitle,
+        BlogAuthor: blogAuthor,
+        BlogContent: blogContent,
+        BlogStatus: blogStatus
+      };
+
+      let blogLst = getBlogLst();
+
+      blogLst.push(blog);
+      setBlogLocalStor(blogLst);
+
+      $('#blogTitle').val('');
+      $('#blogAuthor').val('');
+      $('#blogContent').val('');
+      $('#blogTitle').focus();
+
+      $('#blog-tbl').html('');
+      setTimeout(() => {
+        l.stop();
+        loadBlogTable();
+      }, 2000);
+    })
+
+    function loadBlogTable() {
+
+      var lst = getBlogLst();
+
+      $.each(lst, (key, value) => {
+        let blogHtml = `
+        <tr>
+            <th scope="row">${key}</th>
+            <td>${value.BlogTitle}</td>
+            <td>${value.BlogAuthor}</td>
+            <td>${value.BlogContent}</td>
+            <td>${value.BlogStatus}</td>
+            <td>
+              <button data-id="${value.BlogId}" onclick="editBtn(this)" class="btn btn-warning">Edit</button>
+              <button data-id="${value.BlogId}" onclick="deleteBtn(this)" class="btn btn-danger">Delete</button>
+            </td>
+          </tr>
+        `;
+
+        $('#blog-tbl').append(blogHtml);
+      })
+    }
+
+    function editBtn(element) {
+      var id = $(element).data("id");
+
+      var blogLst = getBlogLst();
+      var blogResult = blogLst.filter((x) => {
+        return x.BlogId === id;
+      })
+
+      var blog = blogResult[0];
+      editId = blog.BlogId;
+      $('#blogTitle').val(blog.BlogTitle);
+      $('#blogAuthor').val(blog.BlogAuthor);
+      $('#blogContent').val(blog.BlogContent);
+      var statusCheck = blog.BlogStatus === 'Public' ? true : false;
+      console.log('status ', statusCheck)
+      if (statusCheck) {
+        $("#ch1").prop("checked", true)
+        $("#ch2").prop("checked", false)
+      } else {
+        $("#ch1").prop("checked", false)
+        $("#ch2").prop("checked", true)
+      }
+
+      $('#blogTitle').focus();
+    }
+
+    function deleteBtn(element) {
+
+      confirmAlert("Are you sure want to delete?").then((result) => {
+        if (!result) return;
+        var id = $(element).data('id');
+
+        var blogLst = getBlogLst();
+        var index = blogLst.findIndex((x) => x.BlogId === id);
+        blogLst.splice(index, 1);
+
+        setBlogLocalStor(blogLst);
+        $('#blog-tbl').html('');
+        loadBlogTable();
+
+        successAlert("Success", "Delete successful");
+      })
+    }
+
+    $('#update-btn').click(() => {
+      if (editId === null || editId === '') return;
+
+      var blogLst = getBlogLst();
+      var index = blogLst.findIndex((x) => x.BlogId === editId);
+
+      blogLst[index].BlogTitle = $('#blogTitle').val();
+      blogLst[index].BlogAuthor = $('#blogAuthor').val();
+      blogLst[index].BlogContent = $('#blogContent').val();
+      blogLst[index].BlogStatus = $("input[name='status']:checked").val() === 'true' ?
+        'Public' : 'Only Me';
+
+      editId = '';
+      setBlogLocalStor(blogLst);
+      $('#blogTitle').val('');
+      $('#blogAuthor').val('');
+      $('#blogContent').val('');
+      $('#blog-tbl').html('');
+      $('#blogTitle').focus();
+      loadBlogTable();
+    })
+
+    function setBlogLocalStor(lst) {
+      localStorage.setItem("Blog", JSON.stringify(lst));
+    }
+
+    function getBlogLst() {
+      var lst = [];
+      var jsonBlogStr = localStorage.getItem('Blog')
+
+      if (!(jsonBlogStr === undefined || jsonBlogStr === null || jsonBlogStr === '')) {
+        lst = JSON.parse(jsonBlogStr);
+      }
+      return lst;
+    }
+
+    function getUUID() {
+      var uuid = "", i, random;
+      for (i = 0; i < 32; i++) {
+        random = Math.random() * 16 | 0;
+        if (i == 8 || i == 12 || i == 16 || i == 20) {
+          uuid += "-";
+        }
+        uuid += (i == 12 ? 4 : (i == 16 ? (random & 3 | 8) : random)).toString(16);
+      }
+      return uuid;
+    }
+
+    function confirmAlert(message) {
+      return new Promise((resolve, reject) => {
+        Swal.fire({
+          title: "Confirmation",
+          text: message,
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+          resolve(result.isConfirmed);
+        });
+      })
+    }
+
+    function successAlert(title, messsage) {
+      Swal.fire({
+        title: title,
+        text: messsage,
+        icon: "success"
+      });
+    }
+
+    function warningAlert(message) {
+      Swal.fire(message);
+      return;
+    }
+
+  </script>
+</body>
+
+</html>

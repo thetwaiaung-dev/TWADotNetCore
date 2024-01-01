@@ -1,0 +1,80 @@
+﻿@model BlogDto;
+@{
+    ViewData["Title"] = "Blog Update";
+
+    string message = null;
+    bool isSuccess = false;
+    if (TempData["Message"] != null)
+    {
+        message = TempData["Message"].ToString();
+        isSuccess = Convert.ToBoolean(TempData["IsSuccess"]);
+    }
+}
+
+@if (message != null)
+{
+    <div class="alert alert-@(isSuccess ? "success" : "danger")" role="alert">
+        @message
+    </div>
+}
+
+<div class="container">
+    <form method="post">
+        <div class="mb-3">
+            <label>Blog Title</label>
+            <input class="form-control" asp-for="Blog_Title" type="text" id="blogTitle" />
+        </div>
+        <input type="hidden" asp-for="Blog_Id" id="blogId" />
+        <div class="mb-3">
+            <label>Blog Author</label>
+            <input class="form-control" asp-for="Blog_Author" type="text" id="blogAuthor" />
+        </div>
+        <div class="mb-3">
+            <label>Blog Content</label>
+            <input class="form-control" asp-for="Blog_Content" type="text" id="blogContent" />
+        </div>
+        <a asp-controller="BlogAjax" asp-action="list"><button type="button" class="btn btn-secondary">Cancel</button></a>
+        <button type="button" class="btn btn-success ladda-button" data-style="expand-left" id="btnSave">
+            Update
+        </button>
+    </form>
+</div>
+
+@section scripts{
+    <script>
+        $('#btnSave').click((e) => {
+
+            var l = Ladda.create(document.querySelector('.ladda-button'));
+            l.start();
+
+            var blogData = {
+                Blog_id: $('#blogId').val(),
+                Blog_Title: $('#blogTitle').val(),
+                Blog_Author: $('#blogAuthor').val(),
+                Blog_Content: $('#blogContent').val(),
+            };
+
+            $.ajax({
+                url: '/blogajax/updateBlog',
+                type: 'POST',
+                data: {
+                    reqModel: blogData
+                },
+                success: function (data) {
+                    l.stop();
+                    if (!data.isSuccess) {
+                        return errorMessage(data.message);
+                    }
+                    if (data.isSuccess) {
+                        return successMessage(data.message, "/blogajax/list");
+                    }
+                },
+                error: function (request, status, error) {
+                    l.stop();
+                    console.log({ request, status, error });
+                }
+            });
+        })
+    </script>
+}
+

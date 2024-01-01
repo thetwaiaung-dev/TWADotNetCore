@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <style>
+        #map {
+            height: 400px;
+            width: 100%;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <h2>Google Map</h2>
+
+    <div id="map"></div>
+
+
+    <script>
+        function initMap() {
+            var options = {
+                zoom: 8,
+                center: { lat: 16.8409, lng: 96.1735 }
+            }
+
+            //net map
+            const map = new google.maps.Map(document.getElementById("map"), options);
+
+            /*
+            //add marker
+            var marker = new google.maps.Marker({
+                position:{lat:16.8606,lng:96.1226},
+                map:map
+            })
+
+            */
+
+            addMarker({lat:16.8606,lng:96.1226})
+            addMarker({lat:16.7745,lng:96.1588})
+
+            //add marker function
+            function addMarker(coords) {
+                var marker = new google.maps.Marker({
+                    position: coords,
+                    map: map
+                })
+            }
+
+        }
+        window.initMap = initMap;
+    </script>
+
+    <!-- <script>
+        function initMap() {
+            var options = {
+                zoom: 8,
+                center: { lat: 16.8409, lng: 96.1735 }
+            };
+            const map = new google.maps.Map(document.getElementById("map"), options);
+
+            const startLocation = {
+                lat: 16.8606,
+                lng: 96.1226
+            };
+
+            const endLocation = {
+                lat: 16.7745,
+                lng: 96.1588
+            };
+
+            const directionService = new google.maps.DirectionsService();
+            const directionsRenderer = new google.maps.DirectionsRenderer(); // Corrected variable name
+
+            directionService.route({
+                origin: startLocation,
+                destination: endLocation,
+                travelMode: google.maps.TravelMode.DRIVING
+            }, function (response, status) {
+                if (status === google.maps.DirectionsStatus.OK) {
+                    directionsRenderer.setDirections(response); // Corrected method name
+                    directionsRenderer.setMap(map);
+                } else {
+                    console.error("Directions request failed with status: " + status);
+                }
+            });
+        }
+
+
+    </script> -->
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAVN-utgONKkaahDS2fQzHhhjgeqK-y_OU&callback=initMap&v=weekly"
+        defer></script>
+
+</body>
+
+</html>

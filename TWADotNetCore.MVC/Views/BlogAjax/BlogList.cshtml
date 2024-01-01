@@ -1,0 +1,100 @@
+﻿@model BlogListResponseModel;
+@{
+    ViewData["Title"] = "Blog List";
+    int pageNo = Model.PageSetting.PageNo;
+    int pageSize = Model.PageSetting.PageSize;
+    int pageCount = Model.PageSetting.PageCount;
+    string pageUrl = Model.PageSetting.PageUrl;
+    int count = (pageNo - 1) * pageSize;
+
+    string message = null;
+    bool isSuccess = false;
+    if (TempData["Message"] != null)
+    {
+        message = TempData["Message"].ToString();
+        isSuccess = Convert.ToBoolean(TempData["IsSuccess"]);
+    }
+}
+
+
+<div class=" row justify-content-end">
+    <div class="col">
+        <h2 class="mb-2">Blog Ajax</h2>
+    </div>
+    <div class="d-flex col justify-content-end">
+        <a asp-action="create" asp-controller="BlogAjax"><button class="btn btn-outline-primary">Create Blog</button></a>
+    </div>
+</div>
+
+@if (message != null)
+{
+    <div class="alert alert-@(isSuccess ? "success" : "danger")" role="alert">
+        @message
+    </div>
+}
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Blog Title</th>
+            <th scope="col">Blog Author</th>
+            <th scope="col">Blog Content</th>
+            <th scope="col">Edit</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var blog in Model.BlogList)
+        {
+            <tr>
+                <th scope="row">@(++count)</th>
+                <td>@blog.Blog_Title</td>
+                <td>@blog.Blog_Author</td>
+                <td>@blog.Blog_Content</td>
+                <td>
+                    <a class="btn btn-warning" asp-action="edit" asp-controller="blogajax" asp-route-id="@blog.Blog_Id">
+                        <i class="fa-solid fa-pen-to-square"></i>
+                    </a>
+                    <button type="button" onclick="deleteBlog(@blog.Blog_Id)" class="btn btn-danger" id="btnDelete">
+                        <i class="fa-solid fa-trash"></i>
+                    </button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@await Html.PartialAsync("_Pagination", Model.PageSetting)
+@section scripts{
+
+    <script>
+
+        function deleteBlog(id) {
+            console.log('hihi', id);
+            var blogId = id;
+            confirmDelete("Are you sure you want to delete?", blogId)
+                .then((blogId) => {
+                    $.ajax({
+                        type: "Get",
+                        url: '/blogajax/deleteBlog/'+blogId,
+                        success: function (data) {
+                            if (!data.isSuccess) {
+                                return errorMessage(data.message);
+                            }
+                            if (data.isSuccess) {
+                                return successMessage(data.message, "/blogajax/list");
+                            }
+                        },
+                        error: function (error) {
+                            console.error(error);
+                        }
+                    });
+                })
+                .catch((error) => {
+                    console.error(error);
+                });
+        }
+
+    </script>
+
+}

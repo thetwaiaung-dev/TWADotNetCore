@@ -1,0 +1,40 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model List<BlogModel>
+
+<h2>Report</h2>
+
+<a asp-controller="report" asp-action="Export" class="btn btn-primary mb-3">Export</a>
+<a asp-controller="report" asp-action="Create" class="btn btn-success mb-3">Create</a>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">Blog Title</th>
+            <th scope="col">Blog Author</th>
+            <th scope="col">Blog Content</th>
+            <th scope="col">Edit</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var blog in Model)
+        {
+            <tr>
+                <td>@blog.Blog_Title</td>
+                <td>@blog.Blog_Author</td>
+                <td>@blog.Blog_Content</td>
+                <td>
+                    <a asp-action="EditBlog" asp-controller="Blog" asp-route-id="@blog.Blog_Id">
+                        <button class="btn">Update</button>
+                    </a>
+                    <a asp-action="DeleteBlog" asp-controller="Blog" asp-route-id="@blog.Blog_Id">
+                        <button class="btn">Delete</button>
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

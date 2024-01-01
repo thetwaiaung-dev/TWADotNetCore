@@ -1,0 +1,29 @@
+﻿
+@model BlogDto;
+@{ 
+    ViewData["Title"]="Save Blog";
+}
+
+<partial name="_ValidationMessage" />
+
+<div class="container">
+    <form asp-controller="Blog" asp-action="SaveBlog" method="post">
+        <div class="mb-3">
+            <label>Blog Title</label>
+            <input asp-for="@Model.Blog_Title" class="form-control" type="text" />
+            <span asp-validation-for="@Model.Blog_Title" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label>Blog Author</label>
+            <input asp-for="@Model.Blog_Author" class="form-control" type="text" />
+            <span asp-validation-for="@Model.Blog_Author" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label>Blog Content</label>
+            <input asp-for="@Model.Blog_Content" class="form-control" type="text" />
+            <span asp-validation-for="@Model.Blog_Content" class="text-danger"></span>
+        </div>
+        <a asp-controller="Blog" asp-action="index"><button type="button" class="btn btn-secondary">Cancel</button></a>
+        <button type="submit" class="btn btn-success">Save</button>
+    </form>
+</div>

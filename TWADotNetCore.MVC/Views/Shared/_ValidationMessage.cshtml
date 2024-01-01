@@ -1,0 +1,12 @@
+﻿@if (TempData["Message"] != null && Convert.ToBoolean(TempData["IsSuccess"]) == true)
+{
+    <div class="alert alert-success mb-3" role="alert">
+        @TempData["Message"]
+    </div>
+}
+@if (TempData["Message"] != null && Convert.ToBoolean(TempData["IsSuccess"]) == false)
+{
+    <div class="alert alert-danger" role="alert">
+        @TempData["Message"]
+    </div>
+}
