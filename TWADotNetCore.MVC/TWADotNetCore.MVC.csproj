@@ -6,6 +6,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
 		<PackageReference Include="NPOI" Version="2.6.2" />
 		<PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="3.1.32" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.0" />
@@ -13,6 +14,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Folder Include="Models\ApexChartModels\" />
 	  <Folder Include="wwwroot\reports\" />
 	</ItemGroup>
 
