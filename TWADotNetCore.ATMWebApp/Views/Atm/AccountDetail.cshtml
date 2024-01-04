@@ -1,0 +1,52 @@
+﻿@{
+    ViewData["Title"] = "Account Detail";
+}
+@model AtmCardRequestModel
+
+@section styleSheet{
+    <link href="~/css/accountdetails.css" rel="stylesheet" />
+}
+
+<div class="col-md-7 d-flex align-items-center p-0">
+    <div class="row w-100 align-items-center">
+        <!--nav bar-->
+        @await Html.PartialAsync("_Navbar")
+
+        <div class="col-md-9">
+            <div class=" d-flex justify-content-center">
+                <h1>ACCOUNT DETAILS</h1>
+            </div>
+            <div class="card p-2 bg-light mb-3 align-items-center">
+                <div class="row w-100">
+                    <div class="col d-flex justify-content-center">
+                        <h4 class="text-uppercase"><span class="fw-lighter">Card No</span></h4>
+                    </div>
+                    <div class="col">
+                        <h5 class="text-uppercase balance ">@Model.CardNo</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="card p-2 bg-light mb-3 align-items-center">
+                <div class="row w-100">
+                    <div class="col d-flex justify-content-center">
+                        <h4 class="text-uppercase"><span class="fw-lighter">Balance</span></h4>
+                    </div>
+                    <div class="col">
+                        <h5 class="balance ">@Model.Amount Ks</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="row px-2 ">
+                <a asp-controller="atm" asp-action="deposit" class="nav-link col ms-2 p-0 card align-items-center deposit-btn">
+                    <img src="~/deposit_vault.png" alt="Make a Deposit"
+                         class="tile-image big-illustration" />
+                    <h3 class="tile-title">Deposit</h3>
+                </a>
+                <a asp-controller="atm" asp-action="withdrawl" class="nav-link col ms-2 p-0 card align-items-center w-50 withdrawl-btn">
+                    <img src="~/quick_cash.png" alt="Withdraw Funds" class="tile-image" />
+                    <h3 class="tile-title">Withdrawl</h3>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

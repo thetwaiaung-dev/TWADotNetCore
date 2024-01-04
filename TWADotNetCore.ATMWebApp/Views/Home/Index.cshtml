@@ -1,0 +1,20 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="col d-flex align-items-center">
+    <div>
+        <div class="card p-2 bg-light mb-3 align-items-center">
+            <a class="btn " asp-controller="home" asp-action="login"
+                    style="background-color: #0d888e;width: 8rem;font-size: 20px;color: white;">
+                Login<i class="fa-solid fa-right-to-bracket"></i>
+            </a>
+        </div>
+        <div class="card p-2 bg-light mb-3 align-items-center">
+            <a class="btn " asp-controller="home" asp-action="register"
+                    style="background-color: #2d8cec;width: 8rem;font-size: 20px;color: white;">
+                Register <i class="fa-solid fa-chevron-right"></i>
+            </a>
+        </div>
+    </div>
+</div>

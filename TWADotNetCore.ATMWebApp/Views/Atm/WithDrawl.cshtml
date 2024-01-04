@@ -1,0 +1,144 @@
+﻿@{
+    ViewData["Title"] = "Withdrawl";
+}
+
+@section styleSheet{
+    <link href="~/css/withdrawl.css" rel="stylesheet" />
+}
+
+<div class="col-md-7 d-flex align-items-center p-0 ">
+    <div class="row w-100 align-items-center">
+        <!--nav bar-->
+        @await Html.PartialAsync("_Navbar")
+
+        <div class="col-md-9">
+            <div class="card p-2 mb-3 align-items-center border border-dark-subtle border-5" style="width:35rem">
+                <div>
+                    <h3 class="text-uppercase" style="color: rgb(50, 40, 66);">Withdrawl funds</h3>
+                </div>
+                <div style="width: 30rem;">
+                    <div>
+                        <table>
+                            <tr class="d-flex justify-content-between mb-2" style="width: 30rem;">
+                                <td>
+                                    <div class="card p-2 bg-light align-items-center" style="width: 7rem;">
+                                        <button class="btn btn-withdrawl" onclick="noClickWithdrawl(5000)"
+                                                style="width: 6rem;font-size: 15px;color: white;">
+                                            5000
+                                        </button>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="card p-2 bg-light align-items-center" style="width: 7rem;">
+                                        <button class="btn btn-withdrawl" onclick="noClickWithdrawl(10000)"
+                                                style="width: 6rem;font-size: 15px;color: white;">
+                                            10000Ks
+                                        </button>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="card p-2 bg-light align-items-center" style="width: 7rem;">
+                                        <button class="btn btn-withdrawl" onclick="noClickWithdrawl(50000)"
+                                                style="width: 6rem;font-size: 15px;color: white;">
+                                            50000Ks
+                                        </button>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="card p-2 bg-light align-items-center" style="width: 7rem;">
+                                        <button class="btn btn-withdrawl" onclick="noClickWithdrawl(100000)"
+                                                style="width: 6rem;font-size: 15px;color: white;">
+                                            100000Ks
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div class="w-100 justify-content-center d-flex mb-3">
+                        <form asp-controller="atm" asp-action="withdrawlatm" method="post" id="withdrawl-form">
+                            <input id="inputNo" style="font-size: 30px;text-align: center;" placeholder="0.00Ks"
+                                   name="amount" class="form-control bg-light border border-3 p-0" type="text" readonly>
+                        </form>
+                    </div>
+                    <div class="w-100">
+                        <table>
+                            <tr class="d-flex justify-content-between mb-2" style="width: 30rem;">
+                                <td style="width: 4rem;height:4rem;">
+                                    <a id="btn1"
+                                       class="btn btn-lg no-btn w-100" onclick="noClickWithdrawl(1)">1</a>
+                                </td>
+                                <td style="width: 4rem;height:4rem;">
+                                    <a id="btn2"
+                                       class="btn btn-lg no-btn w-100" onclick="noClickWithdrawl(2)">2</a>
+                                </td>
+                                <td style="width: 4rem;height:4rem;">
+                                    <a id="btn3"
+                                       class="btn btn-lg no-btn w-100" onclick="noClickWithdrawl(3)">3</a>
+                                </td>
+                                <td style="width: 4rem;height:4rem;">
+                                    <a id="btn1"
+                                       class="btn btn-lg no-btn w-100" onclick="noClickWithdrawl(4)">4</a>
+                                </td>
+                                <td style="width: 4rem;height:4rem;">
+                                    <a id="btn2"
+                                       class="btn btn-lg no-btn w-100" onclick="noClickWithdrawl(5)">5</a>
+                                </td>
+                                <td style="width: 7rem;height:4rem;">
+                                    <button class="text-uppercase btn btn-lg w-100 h-75 btn-withdrawl"
+                                            id="withdrawl-btn" type="button" style="font-size: 15px;">
+                                        Confirm
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr class="d-flex justify-content-between mb-2" style="width: 30rem;">
+                                <td style="width: 4rem;height:4rem;">
+                                    <a id="btn1"
+                                       class="btn btn-lg no-btn w-100" onclick="noClickWithdrawl(6)">6</a>
+                                </td>
+                                <td style="width: 4rem;height:4rem;">
+                                    <a id="btn2"
+                                       class="btn btn-lg no-btn w-100" onclick="noClickWithdrawl(7)">7</a>
+                                </td>
+                                <td style="width: 4rem;height:4rem;">
+                                    <a id="btn3"
+                                       class="btn btn-lg no-btn w-100" onclick="noClickWithdrawl(8)">8</a>
+                                </td>
+                                <td style="width: 4rem;height:4rem;">
+                                    <a id="btn1"
+                                       class="btn btn-lg no-btn w-100" onclick="noClickWithdrawl(9)">9</a>
+                                </td>
+                                <td style="width: 4rem;height:4rem;">
+                                    <a id="btn2"
+                                       class="btn btn-lg no-btn w-100" onclick="noClickWithdrawl(0)">0</a>
+                                </td>
+                                <td style="width: 7rem;height:4rem;">
+                                    <button class="text-uppercase btn btn-lg w-100 h-75 btn-secondary"
+                                            style="font-size: 15px;" onclick="clearNo()">
+                                        clear
+                                    </button>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+@section scripts{
+    <script src="~/js/atmwithdrawl.js"></script>
+    <script>
+        $('#withdrawl-btn').click(()=>{
+
+            var amount = $('#inputNo').val().replace(".00Ks", "");
+            $('#inputNo').val(amount);
+
+            $('#withdrawl-form').submit();
+        })
+    </script>
+}
+

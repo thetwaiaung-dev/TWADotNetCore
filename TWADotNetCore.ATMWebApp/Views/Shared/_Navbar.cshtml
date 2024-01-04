@@ -1,0 +1,28 @@
+﻿@{
+    var userId = 0;
+    if (User.Identity.IsAuthenticated)
+    {
+        userId = Convert.ToInt32(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+    }
+}
+
+<div class="col-md-3 p-0">
+    <div class="card p-2 bg-light mb-3 align-items-center w-100">
+        <a asp-controller="atm" asp-action="account-detail" asp-route-id="@userId" class="btn "
+           style="background-color: #0d888e;width: 8rem;font-size: 20px;color: white;">
+            <i class="fa-solid fa-house"></i>HOME
+        </a>
+    </div>
+    <div class="card p-2 bg-light mb-3 align-items-center w-100">
+        <a asp-controller="atm" asp-action="account-detail" asp-route-id="@userId" class="btn "
+           style="background-color: #374f67;width: 8rem;font-size: 20px;color: white;">
+            <i class="fa-solid fa-chevron-left"></i>BACK
+        </a>
+    </div>
+    <div class="card p-2 bg-light align-items-center w-100">
+        <a asp-controller="home" asp-action="logout" class="btn "
+           style="background-color: #2d8cec;width: 8rem;font-size: 20px;color: white;">
+            <i class="fa-solid fa-right-from-bracket"></i>LOGOUT
+        </a>
+    </div>
+</div>

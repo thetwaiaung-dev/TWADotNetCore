@@ -1,0 +1,25 @@
+﻿.deposit-btn {
+    background-color: white;
+}
+
+    .deposit-btn:hover {
+        background-color: lightgrey;
+    }
+
+.withdrawl-btn {
+    background-color: white;
+}
+
+    .withdrawl-btn:hover {
+        background-color: lightgrey;
+    }
+
+.no-btn {
+    background-color: #374f67;
+    color: white;
+}
+
+    .no-btn:hover {
+        background-color: #566573;
+        color: white;
+    }

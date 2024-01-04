@@ -1,0 +1,22 @@
+﻿@{
+    ViewData["Title"] = "Register Page";
+}
+@model AtmCardRequestModel
+
+<div class="col-md-7 d-flex align-items-center">
+    <form asp-controller="home" asp-action="register" method="post">
+        <div class="mb-3">
+            <input asp-for="Name" placeholder="Name" class="form-control" style="border-color: black;" type="text" />
+        </div>
+        <div class="mb-3">
+            <input asp-for="Email" placeholder="Email" class="form-control" style="border-color: black;" type="text" />
+        </div>
+        <div class="mb-3">
+            <input asp-for="Password" placeholder="password" class="form-control" style="border-color: black;" type="text" />
+        </div>
+        <div>
+            <a asp-controller="home" asp-action="index" class="btn btn-secondary">Cancel</a>
+            <button type="submit" class="btn btn-success">Register</button>
+        </div>
+    </form>
+</div>

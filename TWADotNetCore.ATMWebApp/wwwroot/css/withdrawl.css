@@ -1,0 +1,27 @@
+﻿.withdrawl-btn {
+    background-color: white;
+}
+
+    .withdrawl-btn:hover {
+        background-color: lightgrey;
+    }
+
+.no-btn {
+    background-color: #374f67;
+    color: white;
+}
+
+    .no-btn:hover {
+        background-color: #566573;
+        color: white;
+    }
+
+.btn-withdrawl {
+    background-color: #39d1b8;
+    color: white;
+}
+
+    .btn-withdrawl:hover {
+        background-color: #29b099;
+        color: white;
+    }
