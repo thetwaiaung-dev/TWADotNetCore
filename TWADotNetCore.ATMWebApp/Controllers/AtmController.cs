@@ -4,6 +4,7 @@ using TWADotNetCore.ATMWebApp.Service;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
+using TWADotNetCore.ATMWebApp.Constatnts;
 
 namespace TWADotNetCore.ATMWebApp.Controllers
 {
@@ -24,6 +25,16 @@ namespace TWADotNetCore.ATMWebApp.Controllers
         [ActionName("account-detail")]
         public IActionResult AccountDetail(int id)
         {
+            #region use session
+
+            //var userId = HttpContext.Session.GetInt32(NameConstant.SessionUserId);
+            //if (userId == null)
+            //{
+            //    return Redirect("/home/login");
+            //}
+
+            #endregion
+
             UserModel user = _userService.GetUser(id);
             if (user == null)
             {
@@ -40,6 +51,15 @@ namespace TWADotNetCore.ATMWebApp.Controllers
         [Authorize]
         public IActionResult WithDrawl()
         {
+            #region use session
+
+            //var userId = HttpContext.Session.GetInt32(NameConstant.SessionUserId);
+            //if (userId == null)
+            //{
+            //    return Redirect("/home/login");
+            //}
+
+            #endregion
             return View();
         }
 
@@ -71,6 +91,16 @@ namespace TWADotNetCore.ATMWebApp.Controllers
         [Authorize]
         public IActionResult Deposit()
         {
+            #region use session
+
+            //var userId = HttpContext.Session.GetInt32(NameConstant.SessionUserId);
+            //if (userId == null)
+            //{
+            //    return Redirect("/home/login");
+            //}
+
+            #endregion
+
             return View();
         }
 

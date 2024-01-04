@@ -23,6 +23,8 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
+app.UseSession();
+
 app.UseRouting();
 
 app.UseAuthentication();
@@ -36,6 +38,16 @@ app.Run();
 
 static void ConfigureService(IServiceCollection services)
 {
+
+    //use session
+    services.AddDistributedMemoryCache();
+
+    //configure session
+    services.AddSession(op =>
+    {
+        op.IdleTimeout = TimeSpan.FromSeconds(60 * 60);
+    });
+
     services.AddControllersWithViews();
 
     services.AddAuthentication(Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationDefaults

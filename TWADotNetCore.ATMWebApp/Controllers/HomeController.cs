@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using System.Security.Claims;
+using TWADotNetCore.ATMWebApp.Constatnts;
 
 namespace TWADotNetCore.ATMWebApp.Controllers
 {
@@ -105,6 +106,15 @@ namespace TWADotNetCore.ATMWebApp.Controllers
                 return Json(model);
             }
 
+            #region using session
+
+            //HttpContext.Session.SetString(NameConstant.SessionUserName, user.Name);
+            //HttpContext.Session.SetInt32(NameConstant.SessionUserId, user.Id);
+
+            #endregion
+
+            #region using cookie base authentication
+
             var claims = new List<Claim>()
             {
                  new Claim(ClaimTypes.NameIdentifier,Convert.ToString(user.Id)),
@@ -113,6 +123,8 @@ namespace TWADotNetCore.ATMWebApp.Controllers
             var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
             var principal = new ClaimsPrincipal(identity);
             await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
+
+            #endregion
 
             model.IsSuccess = true;
             model.Message = "Login Successful.";
