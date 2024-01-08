@@ -94,7 +94,7 @@ if (app.Environment.IsDevelopment())
 }
 
 /* limit request */
-app.UseIpRateLimiting();
+  //app.UseIpRateLimiting();
 /* end */
 
 /* limit request 2 */

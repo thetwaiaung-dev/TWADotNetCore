@@ -41,8 +41,6 @@ namespace TWADotNetCore.RestApi.Controllers
         [HttpGet("{pageNo}/{pageSize}")]
         public IActionResult GetAllBlogs(int pageNo, int pageSize)
         {
-            pageNo = 1;
-            pageSize = 5;
 
             var lst = _db.Blogs.OrderByDescending(x => x.Blog_Id)
                          .Skip((pageNo - 1) * pageSize)

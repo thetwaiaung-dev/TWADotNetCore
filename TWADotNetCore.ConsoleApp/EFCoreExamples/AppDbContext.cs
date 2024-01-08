@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Text;
-using TWADotNetCore.Models;
+using TWADotNetCore.ConsoleApp.Models;
 
 namespace TWADotNetCore.ConsoleApp.EFCoreExamples
 {

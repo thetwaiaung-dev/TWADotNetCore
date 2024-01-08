@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
-using TWADotNetCore.Models;
+using TWADotNetCore.ConsoleApp.Models;
 using static System.Net.Mime.MediaTypeNames;
 
 namespace TWADotNetCore.ConsoleApp.HttpClientExamples

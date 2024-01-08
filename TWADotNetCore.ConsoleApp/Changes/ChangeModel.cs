@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using TWADotNetCore.Dtos;
-using TWADotNetCore.Models;
+using TWADotNetCore.ConsoleApp.Dtos;
+using TWADotNetCore.ConsoleApp.Models;
 
 namespace TWADotNetCore.ConsoleApp.Changes
 {

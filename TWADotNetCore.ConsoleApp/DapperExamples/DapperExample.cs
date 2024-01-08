@@ -5,7 +5,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
-using TWADotNetCore.Models;
+using TWADotNetCore.ConsoleApp.Models;
 
 namespace TWADotNetCore.ConsoleApp.DapperExamples
 {
