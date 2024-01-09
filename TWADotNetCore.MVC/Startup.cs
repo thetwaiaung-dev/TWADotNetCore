@@ -8,6 +8,7 @@ using Microsoft.Extensions.Hosting;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 using TWADotNetCore.MVC.AppDbContext;
 using TWADotNetCore.MVC.Services;
@@ -32,6 +33,13 @@ namespace TWADotNetCore.MVC
             {
                 opt.UseSqlServer(Configuration.GetConnectionString("con"));
             }, ServiceLifetime.Transient, ServiceLifetime.Transient);
+
+            #region HttpClient
+            services.AddScoped(x => new HttpClient
+            {
+                BaseAddress = new Uri(Configuration.GetSection("RestApiUrl").Value)
+            });
+            #endregion
 
             services.AddTransient<ReportService>();
             services.AddTransient<BlogService>();
