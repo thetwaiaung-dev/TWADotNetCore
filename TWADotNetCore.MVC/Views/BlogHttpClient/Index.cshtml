@@ -2,23 +2,43 @@
 @{
     int count = 0;
 }
-<table class="table">
+
+<partial name="_ValidationMessage" />
+
+<div class=" row justify-content-end">
+    <div class="col">
+        <h2 class="mb-2">Blog</h2>
+    </div>
+    <div class="d-flex col justify-content-end">
+        <a asp-action="CreateBlog"><button class="btn btn-outline-primary">Create Blog</button></a>
+    </div>
+</div>
+
+<table class="table table-striped">
     <thead>
         <tr>
             <th scope="col">#</th>
-            <th scope="col">Title</th>
-            <th scope="col">Author</th>
-            <th scope="col">Content</th>
+            <th scope="col">Blog Title</th>
+            <th scope="col">Blog Author</th>
+            <th scope="col">Blog Content</th>
+            <th scope="col">Action</th>
         </tr>
-    </thead>
     <tbody>
-        @foreach (var item in Model.Data)
+        @foreach (var blog in Model.Data)
         {
             <tr>
                 <th scope="row">@(++count)</th>
-                <td>@item.Blog_Title</td>
-                <td>@item.Blog_Author</td>
-                <td>@item.Blog_Content</td>
+                <td>@blog.Blog_Title</td>
+                <td>@blog.Blog_Author</td>
+                <td>@blog.Blog_Content</td>
+                <td>
+                    <a asp-action="EditBlog" asp-route-id="@blog.Blog_Id">
+                        <button class="btn">Update</button>
+                    </a>
+                    <a asp-action="DeleteBlog" asp-route-id="@blog.Blog_Id">
+                        <button class="btn">Delete</button>
+                    </a>
+                </td>
             </tr>
         }
     </tbody>
