@@ -66,5 +66,24 @@ namespace TWADotNetCore.MVC.Controllers
             TempData["IsSuccess"] = model.IsSuccess;
             return View("CreateBlog", dto);
         }
+
+        public async Task<IActionResult> EditBlog(int id)
+        {
+            BlogApiResponseModel model = new BlogApiResponseModel();
+            var response = await _httpClient.GetAsync($"api/Blog/{id}");
+
+            if (response.IsSuccessStatusCode)
+            {
+                string jsonStr = await response.Content.ReadAsStringAsync();
+                model = JsonConvert.DeserializeObject<BlogApiResponseModel>(jsonStr);
+
+                BlogDto dto = model.Data.Change();
+                return View(dto);
+            }
+
+            TempData["Message"] = model.Message;
+            TempData["IsSuccess"] = model.IsSuccess;
+            return Redirect("Index");
+        }
     }
 }
