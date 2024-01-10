@@ -1,6 +1,7 @@
 using AspNetCoreRateLimit;
 using Microsoft.AspNetCore.RateLimiting;
 using Microsoft.EntityFrameworkCore;
+using System.Text.Json;
 using System.Threading.RateLimiting;
 using TWADotNetCore.RestApi.EFCoreExamples;
 
@@ -64,9 +65,12 @@ builder.Services.AddInMemoryRateLimiting();
 builder.Services.AddTransient<IRateLimitConfiguration, RateLimitConfiguration>();
 #endregion
 
+builder.Services.AddControllers().AddJsonOptions(opt =>
+{
+    opt.JsonSerializerOptions.PropertyNamingPolicy = null;
+    opt.JsonSerializerOptions.PropertyNameCaseInsensitive = false;
+});
 
-builder.Services.AddControllers();
-builder.Services.AddControllersWithViews().AddNewtonsoftJson();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -94,7 +98,7 @@ if (app.Environment.IsDevelopment())
 }
 
 /* limit request */
-  //app.UseIpRateLimiting();
+//app.UseIpRateLimiting();
 /* end */
 
 /* limit request 2 */
