@@ -85,5 +85,53 @@ namespace TWADotNetCore.MVC.Controllers
             TempData["IsSuccess"] = model.IsSuccess;
             return Redirect("Index");
         }
+
+        [HttpPost]
+        public async Task<IActionResult> UpdateBlog(int id, BlogDto dto)
+        {
+            BlogApiResponseModel model = new BlogApiResponseModel();
+            if (ModelState.IsValid)
+            {
+                BlogModel blog = dto.Change();
+                string blogJson = JsonConvert.SerializeObject(blog);
+
+                HttpContent httpContent = new StringContent(blogJson, Encoding.UTF8, Application.Json);
+
+                var response = await _httpClient.PutAsync($"https://localhost:7001/api/Blog/{id}", httpContent);
+                if (response.IsSuccessStatusCode)
+                {
+                    string jsonStr = await response.Content.ReadAsStringAsync();
+                    model = JsonConvert.DeserializeObject<BlogApiResponseModel>(jsonStr);
+
+                    TempData["Message"] = model.Message;
+                    TempData["IsSuccess"] = model.IsSuccess;
+                    return RedirectToAction("Index","BlogHttpClient");
+                }
+            }
+
+            TempData["Message"] = model.Message;
+            TempData["IsSuccess"] = model.IsSuccess;
+            return View("EditBlog",dto);
+        }
+
+        public async Task<IActionResult> DeleteBlog(int id)
+        {
+            BlogApiResponseModel model = new BlogApiResponseModel();
+            var response = await _httpClient.DeleteAsync($"https://localhost:7001/api/Blog/{id}");
+
+            if (response.IsSuccessStatusCode)
+            {
+                string jsonStr = await response.Content.ReadAsStringAsync();
+                model = JsonConvert.DeserializeObject<BlogApiResponseModel>(jsonStr);
+
+                TempData["Message"] = model.Message;
+                TempData["IsSuccess"] = model.IsSuccess;
+                return RedirectToAction("Index", "BlogHttpClient");
+            }
+
+            TempData["Message"] = model.Message;
+            TempData["IsSuccess"] = model.IsSuccess;
+            return RedirectToAction("Index", "BlogHttpClient");
+        }
     }
 }

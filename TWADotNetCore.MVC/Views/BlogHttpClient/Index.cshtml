@@ -24,8 +24,8 @@
             <th scope="col">Action</th>
         </tr>
     <tbody>
-        @foreach (var blog in Model.Data)
-        {
+            @foreach (var blog in Model.Data)
+            {
             <tr>
                 <th scope="row">@(++count)</th>
                 <td>@blog.Blog_Title</td>
@@ -33,13 +33,13 @@
                 <td>@blog.Blog_Content</td>
                 <td>
                     <a asp-action="EditBlog" asp-route-id="@blog.Blog_Id">
-                        <button class="btn">Update</button>
+                        <button class="btn btn-warning">Update</button>
                     </a>
                     <a asp-action="DeleteBlog" asp-route-id="@blog.Blog_Id">
-                        <button class="btn">Delete</button>
+                        <button class="btn btn-danger">Delete</button>
                     </a>
                 </td>
             </tr>
-        }
+            }
     </tbody>
 </table>
