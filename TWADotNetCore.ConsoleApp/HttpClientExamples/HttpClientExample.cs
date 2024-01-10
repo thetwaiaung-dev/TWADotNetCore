@@ -96,5 +96,19 @@ namespace TWADotNetCore.ConsoleApp.HttpClientExamples
             }
         }
 
+        public async Task Delete(int id)
+        {
+            HttpClient client = new HttpClient();
+            var response = await client.DeleteAsync($"https://localhost:7001/api/Blog/{id}");
+
+            if (response.IsSuccessStatusCode)
+            {
+                string jsonStr = await response.Content.ReadAsStringAsync();
+                BlogResponseModel model = JsonConvert.DeserializeObject<BlogResponseModel>(jsonStr);
+
+                Console.WriteLine(JsonConvert.SerializeObject(model, Formatting.Indented));
+            }
+        }
+
     }
 }
