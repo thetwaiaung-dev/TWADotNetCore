@@ -68,7 +68,7 @@ builder.Services.AddTransient<IRateLimitConfiguration, RateLimitConfiguration>()
 builder.Services.AddControllers().AddJsonOptions(opt =>
 {
     opt.JsonSerializerOptions.PropertyNamingPolicy = null;
-    opt.JsonSerializerOptions.PropertyNameCaseInsensitive = false;
+    //opt.JsonSerializerOptions.PropertyNameCaseInsensitive = false;
 });
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
