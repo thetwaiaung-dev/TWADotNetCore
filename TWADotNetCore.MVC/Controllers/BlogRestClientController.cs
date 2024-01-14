@@ -1,42 +1,42 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
+using Microsoft.AspNetCore.Mvc.ViewEngines;
 using Newtonsoft.Json;
+using RestSharp;
 using System;
-using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 using TWADotNetCore.MVC.Dtos;
 using TWADotNetCore.MVC.Models;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace TWADotNetCore.MVC.Controllers
 {
-    public class BlogHttpClientController : Controller
+    public class BlogRestClientController : Controller
     {
-        private readonly HttpClient _httpClient;
+        private readonly RestClient _restClient;
 
-        public BlogHttpClientController(HttpClient httpClient)
+        public BlogRestClientController(RestClient restClient)
         {
-            _httpClient = httpClient;
+            _restClient = restClient;
         }
 
         public async Task<IActionResult> Index()
         {
             BlogListApiResponseModel model = new BlogListApiResponseModel();
-            var response = await _httpClient.GetAsync("api/Blog");
+            RestRequest request = new RestRequest("api/Blog", Method.Get);
 
+            //await _restClient.GetAsync(request);
+            var response = await _restClient.ExecuteAsync(request);
             if (response.IsSuccessStatusCode)
             {
-                string jsonStr = await response.Content.ReadAsStringAsync();
+                string jsonStr = response.Content;
                 model = JsonConvert.DeserializeObject<BlogListApiResponseModel>(jsonStr);
             }
 
-            return View(model);
+            return View("~/Views/BlogHttpClient/Index.cshtml", model);
         }
 
         public IActionResult CreateBlog()
         {
-            return View();
+            return View("~/Views/BlogHttpClient/CreateBlog.cshtml");
         }
 
         [HttpPost]
@@ -46,44 +46,44 @@ namespace TWADotNetCore.MVC.Controllers
             if (ModelState.IsValid)
             {
                 BlogModel blog = dto.Change();
+                RestRequest request = new RestRequest("api/Blog", Method.Post);
+                request.AddJsonBody(blog);
 
-                string blogJson = JsonConvert.SerializeObject(blog);
-                HttpContent httpContent = new StringContent(blogJson, Encoding.UTF8, Application.Json);
-
-                var response = await _httpClient.PostAsync("api/Blog/", httpContent);
+                var response = await _restClient.ExecuteAsync(request);
                 if (response.IsSuccessStatusCode)
                 {
-                    string jsonStr = await response.Content.ReadAsStringAsync();
+                    string jsonStr = response.Content;
                     model = JsonConvert.DeserializeObject<BlogApiResponseModel>(jsonStr);
 
                     TempData["Message"] = model.Message;
                     TempData["IsSuccess"] = model.IsSuccess;
-                    return Redirect("Index");
+                    return RedirectToAction("Index", "BlogRestClient");
                 }
             }
 
             TempData["Message"] = model.Message;
             TempData["IsSuccess"] = model.IsSuccess;
-            return View("CreateBlog", dto);
+            return View("~/Views/BlogHttpClient/CreateBlog.cshtml", dto);
         }
 
         public async Task<IActionResult> EditBlog(int id)
         {
             BlogApiResponseModel model = new BlogApiResponseModel();
-            var response = await _httpClient.GetAsync($"api/Blog/{id}");
+            RestRequest request = new RestRequest($"api/Blog/{id}");
 
+            var response = await _restClient.ExecuteAsync(request);
             if (response.IsSuccessStatusCode)
             {
-                string jsonStr = await response.Content.ReadAsStringAsync();
+                string jsonStr = response.Content;
                 model = JsonConvert.DeserializeObject<BlogApiResponseModel>(jsonStr);
 
                 BlogDto dto = model.Data.Change();
-                return View(dto);
+                return View("~/Views/BlogHttpClient/EditBlog.cshtml", dto);
             }
 
             TempData["Message"] = model.Message;
             TempData["IsSuccess"] = model.IsSuccess;
-            return Redirect("Index");
+            return RedirectToAction("Index", "BlogRestClient");
         }
 
         [HttpPost]
@@ -93,41 +93,41 @@ namespace TWADotNetCore.MVC.Controllers
             if (ModelState.IsValid)
             {
                 BlogModel blog = dto.Change();
-                string blogJson = JsonConvert.SerializeObject(blog);
+                RestRequest request = new RestRequest($"api/Blog/{id}", Method.Put);
+                request.AddJsonBody(blog);
 
-                HttpContent httpContent = new StringContent(blogJson, Encoding.UTF8, Application.Json);
-
-                var response = await _httpClient.PutAsync($"https://localhost:7001/api/Blog/{id}", httpContent);
+                var response = await _restClient.ExecuteAsync(request);
                 if (response.IsSuccessStatusCode)
                 {
-                    string jsonStr = await response.Content.ReadAsStringAsync();
+                    string jsonStr = response.Content;
                     model = JsonConvert.DeserializeObject<BlogApiResponseModel>(jsonStr);
 
                     TempData["Message"] = model.Message;
                     TempData["IsSuccess"] = model.IsSuccess;
-                    return RedirectToAction("Index","BlogHttpClient");
+                    return RedirectToAction("Index", "BlogRestClient");
                 }
             }
 
             TempData["Message"] = model.Message;
             TempData["IsSuccess"] = model.IsSuccess;
-            return View("EditBlog",dto);
+            return View("~/Views/BlogHttpClient/EditBlog.cshtml", dto);
         }
 
         public async Task<IActionResult> DeleteBlog(int id)
         {
             BlogApiResponseModel model = new BlogApiResponseModel();
-            var response = await _httpClient.DeleteAsync($"https://localhost:7001/api/Blog/{id}");
+            RestRequest request = new RestRequest($"https://localhost:7001/api/Blog/{id}", Method.Delete);
 
+            var response = await _restClient.ExecuteAsync(request);
             if (response.IsSuccessStatusCode)
             {
-                string jsonStr = await response.Content.ReadAsStringAsync();
+                string jsonStr = response.Content;
                 model = JsonConvert.DeserializeObject<BlogApiResponseModel>(jsonStr);
             }
 
             TempData["Message"] = model.Message;
             TempData["IsSuccess"] = model.IsSuccess;
-            return RedirectToAction("Index", "BlogHttpClient");
+            return RedirectToAction("Index", "BlogRestClient");
         }
     }
 }

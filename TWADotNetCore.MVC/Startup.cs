@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using RestSharp;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -39,6 +40,10 @@ namespace TWADotNetCore.MVC
             {
                 BaseAddress = new Uri(Configuration.GetSection("RestApiUrl").Value)
             });
+            #endregion
+
+            #region RestClient
+            services.AddScoped(x => new RestClient(Configuration.GetSection("RestApiUrl").Value));
             #endregion
 
             services.AddTransient<ReportService>();
