@@ -16,8 +16,8 @@ namespace TWADotNetCore.ConsoleApp.HttpClientExamples
             //await Read();
             //await Edit(8);
 
-            //await Create("Rest api title3", "Rest author3", "Rest content3");
-            await Update(9,"Rest api title update", "Rest author update", "Rest content3");
+            await Create("Rest api title33", "Rest author3", "Rest content3");
+            //await Update(9,"Rest api title update", "Rest author update", "Rest content3");
         }
 
         public async Task Read()

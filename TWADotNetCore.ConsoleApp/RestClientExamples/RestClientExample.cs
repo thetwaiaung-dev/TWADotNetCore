@@ -14,13 +14,13 @@ namespace TWADotNetCore.ConsoleApp.RestClientExamples
         {
             //await Edit(11);
 
-            //await Create("Restclient Title", "Restclient Author", "Restclient Content");
+            await Create("Restclient Title Update23", "Restclient Author", "Restclient Content");
 
             //await Update(12,"Restclient Title update", "Restclient Author update", "Restclient Content update");
 
             //await Delete(11);
 
-            await Read();
+            //await Read();
         }
 
         public async Task Read()
@@ -63,8 +63,8 @@ namespace TWADotNetCore.ConsoleApp.RestClientExamples
             };
 
             RestClient client = new RestClient();
-            RestRequest request = new RestRequest("https://localhost:7001/api/Blog/", Method.Post);
-            request.AddBody(blog);  
+            RestRequest request = new RestRequest("https://localhost:7001/api/Blog", Method.Post);
+            request.AddJsonBody(blog);
 
             var response= await client.ExecuteAsync(request);
             if (response.IsSuccessStatusCode)

@@ -26,11 +26,11 @@ namespace TWADotNetCore.ConsoleApp
             Console.WriteLine("Waiting for api...");
             Console.ReadKey();
 
-            HttpClientExample client = new HttpClientExample();
-            await client.Run();
+            //HttpClientExample client = new HttpClientExample();
+            //await client.Run();
 
-            //RestClientExample restClient = new RestClientExample();
-            //await restClient.Run();
+            RestClientExample restClient = new RestClientExample();
+            await restClient.Run();
 
             //RefitExample refit = new RefitExample();
             //await refit.Run();
