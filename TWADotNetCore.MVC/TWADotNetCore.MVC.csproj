@@ -11,7 +11,9 @@
 		<PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="3.1.32" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.0" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.0" />
+		<PackageReference Include="Refit.HttpClientFactory" Version="7.0.0" />
 		<PackageReference Include="RestSharp" Version="110.2.0" />
+		<PackageReference Include="Refit" Version="7.0.0" />
 	</ItemGroup>
 
 	<ItemGroup>

@@ -12,7 +12,9 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using TWADotNetCore.MVC.AppDbContext;
+using TWADotNetCore.MVC.Interfaces;
 using TWADotNetCore.MVC.Services;
+using Refit;
 
 namespace TWADotNetCore.MVC
 {
@@ -36,14 +38,26 @@ namespace TWADotNetCore.MVC
             }, ServiceLifetime.Transient, ServiceLifetime.Transient);
 
             #region HttpClient
+
             services.AddScoped(x => new HttpClient
             {
                 BaseAddress = new Uri(Configuration.GetSection("RestApiUrl").Value)
             });
+
             #endregion
 
             #region RestClient
+
             services.AddScoped(x => new RestClient(Configuration.GetSection("RestApiUrl").Value));
+
+            #endregion
+
+            #region Refit
+
+            services
+            .AddRefitClient<IBlogApi>()
+            .ConfigureHttpClient(c => c.BaseAddress = new Uri(Configuration.GetSection("RestApiUrl").Value));
+
             #endregion
 
             services.AddTransient<ReportService>();
