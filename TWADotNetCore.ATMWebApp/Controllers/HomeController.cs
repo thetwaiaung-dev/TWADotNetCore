@@ -150,7 +150,8 @@ namespace TWADotNetCore.ATMWebApp.Controllers
             int result = _atmService.SaveUserAndAtm(user);
             if (result > 0)
             {
-                return Redirect("Login");
+                TempData["SuccessAtmCard"] = true;
+                return Redirect($"LoginUser/{user.Id}");
             }
 
             return View("Register", request);
