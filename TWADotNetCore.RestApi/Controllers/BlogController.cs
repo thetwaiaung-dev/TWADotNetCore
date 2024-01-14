@@ -81,7 +81,7 @@ namespace TWADotNetCore.RestApi.Controllers
             _db.Blogs.Add(blog);
             var result = _db.SaveChanges();
 
-            string message = result > 0 ? "Success" : "Failed.";
+            string message = result > 0 ? "Saving Success" : "Saving Failed.";
 
             BlogResponseModel data = new BlogResponseModel()
             {
