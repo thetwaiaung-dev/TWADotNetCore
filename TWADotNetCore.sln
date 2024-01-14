@@ -15,7 +15,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TWADotNetCore.ATMWebApp", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TWADotNetCore.ConsoleApp", "TWADotNetCore.ConsoleApp\TWADotNetCore.ConsoleApp.csproj", "{8A0D1DB5-2558-4ADC-A312-F7FB86E675BB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TWADotNetCore.MinimalApi", "TWADotNetCore.MinimalApi\TWADotNetCore.MinimalApi.csproj", "{2D16E793-3684-4A6C-B480-AA065DBADF51}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TWADotNetCore.MinimalApi", "TWADotNetCore.MinimalApi\TWADotNetCore.MinimalApi.csproj", "{2D16E793-3684-4A6C-B480-AA065DBADF51}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TWADotNetCore.LoginWebApp", "TWADotNetCore.LoginWebApp\TWADotNetCore.LoginWebApp.csproj", "{CECB5144-4915-4DF5-8F49-C5CFD5F9321E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +53,10 @@ Global
 		{2D16E793-3684-4A6C-B480-AA065DBADF51}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2D16E793-3684-4A6C-B480-AA065DBADF51}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2D16E793-3684-4A6C-B480-AA065DBADF51}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CECB5144-4915-4DF5-8F49-C5CFD5F9321E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CECB5144-4915-4DF5-8F49-C5CFD5F9321E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CECB5144-4915-4DF5-8F49-C5CFD5F9321E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CECB5144-4915-4DF5-8F49-C5CFD5F9321E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

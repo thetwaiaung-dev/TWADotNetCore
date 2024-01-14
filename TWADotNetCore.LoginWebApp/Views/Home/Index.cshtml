@@ -1,0 +1,21 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+@model LoginViewModel
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+
+<div class="container w-50 mt-5">
+    <div class=" mb-3 justify-content-between">
+        <label class="form-label">Email</label>
+        <input class="form-control" asp-for="Email" readonly/>
+    </div>
+
+    <div class=" justify-content-between">
+        <label class="form-label">Password</label>
+        <input class="form-control" asp-for="Password" readonly />
+    </div>
+</div>
