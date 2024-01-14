@@ -1,0 +1,341 @@
+/* for datatable */
+.dataTables_filter {
+    display: none;
+}
+
+.dataTables_length {
+    visibility: hidden;
+    display: none;
+}
+
+.jaoas-search-box {
+    border-radius: 5px;
+    border: 1px solid #4A65AE;
+    background: #FFF;
+    font-weight: 400;
+    padding: 5px 10px 5px 35px;
+    font-size: .78rem;
+    max-width: 200px;
+    height: 35px;
+    background-image: url('/img/common/search-icon.svg');
+    background-position: 15px 8px;
+    background-repeat: no-repeat;
+}
+
+    .jaoas-search-box:focus,
+    .jaoas-search-box:active {
+        outline: none;
+    }
+
+.jaoas-datatable-length-box {
+    width: 70px;
+    height: 35px;
+    font-size: .78rem;
+    border: 1px solid #4A65AE;
+}
+
+    .jaoas-datatable-length-box:focus {
+        outline: none;
+        box-shadow: none;
+    }
+
+
+.dataTable thead th {
+    background: #BFE0FF;
+    color: #000;
+    text-transform: uppercase;
+    font-size: .78rem;
+    text-align: center;
+    font-weight: 500;
+    letter-spacing: 0.36px;
+    border-bottom: none !important;
+}
+
+.dataTable tbody tr td{
+    color: #687182;
+    font-size: .8rem;
+    font-style: normal;
+    background: #fff !important;
+    font-weight: 500;
+    line-height: 18px; /* 112.5% */
+    letter-spacing: 0.48px;
+    border-bottom: .1px initial #4A65AE;
+}
+
+.jaoas-table tr td{
+    height: 30px !important;
+}
+    .jaoas-table tr td.w-160,
+    .jaoas-table tr th.w-160,
+    .jaoas-table tr th.w-160 :hover{
+        width: 150px !important;
+        min-width: 150px !important;
+        max-width: 150px !important;
+    }
+
+    .jaoas-table tr td:not(first-child),
+    .jaoas-table tr th:not(first-child),
+    .jaoas-table tr th.skip-first-th,
+    .jaoas-table.last-td-ellipsis tr td:last-child {
+        max-width: 150px !important;
+        min-width: 150px !important;
+        text-overflow: ellipsis !important;
+        overflow: hidden;
+        white-space: nowrap;
+    }
+
+    .jaoas-table tr td:first-child,
+    .jaoas-table tr:first-child th:first-child,
+    .jaoas-table tr td:first-child:hover,
+    .jaoas-table tr:first-child th:first-child:hover {
+        max-width: 50px !important;
+        min-width: 50px !important;
+    }
+
+    .jaoas-table tr td:last-child {
+        max-width: 100%;
+        overflow: initial;
+    }
+
+.jaoas-table tr:hover td:not(first-child),
+.jaoas-table tr:hover th:not(first-child),
+.jaoas-table.last-td-ellipsis tr:hover td:last-child {
+    text-overflow: initial !important;
+    color: #000;
+    white-space: initial;
+    max-width: 150px !important;
+    min-width: 150px !important;
+    width: 150px !important;
+    transition: .4s all ease;
+}
+
+.jaoas-table tr:hover td:first-child,
+.jaoas-table tr:hover th:first-child
+{
+    max-width: 50px !important;
+    min-width: 50px !important;
+}
+
+
+@media(max-width: 767px){
+    .jaoas-table tr td:not(first-child),
+    .jaoas-table tr th:not(first-child),
+    .jaoas-table.last-td-ellipsis tr td:last-child {
+        text-overflow: inherit !important;
+        overflow: initial;
+        white-space: initial;
+        min-width: auto !important;
+        max-width: auto !important;
+        width: auto !important;
+    }
+
+
+    .jaoas-table tr:hover td:not(first-child),
+    .jaoas-table.last-td-ellipsis tr:hover td:last-child {
+        text-overflow: initial !important;
+        color: #000;
+        min-width: auto !important;
+        max-width: auto !important;
+        width: auto !important;
+        white-space: initial;
+    }
+
+    .jaoas-table tr:hover td:first-child,
+    .jaoas-table tr:hover th:first-child
+    {
+        max-width: auto !important;
+        min-width: auto !important;
+    }
+}
+
+.dataTables_wrapper.no-footer .dataTables_scrollBody {
+    border-bottom: none !important;
+    position: relative;
+    overflow: auto;
+    height: 350px;
+}
+
+.dataTables_wrapper.no-footer .dataTables_scrollBody::-webkit-scrollbar {
+    height: 4px; /* Adjust the height as needed for the X-axis scrollbar */
+    width: 4px;  /* Adjust the width as needed for the Y-axis scrollbar */
+}
+
+.dataTables_wrapper.no-footer .dataTables_scrollBody::-webkit-scrollbar-thumb {
+    background-color: #888; /* Color of the thumb */
+    border-radius: 4px;    /* Rounded corners for the thumb */
+}
+
+.dataTables_wrapper.no-footer .dataTables_scrollBody::-webkit-scrollbar-track {
+    background-color: #eee; /* Color of the track */
+}
+
+.dataTables_wrapper.no-footer .dataTables_scrollBody::-webkit-scrollbar-corner {
+    background-color: #eee; /* Color of the corner where X and Y scrollbars meet */
+}
+
+.dataTables_info {
+    font-weight: 400;
+    font-size: .85rem;
+    color: #000;
+}
+
+.dataTables_paginate .paging_simple_numbers {
+    font-weight: 400;
+    font-size: .85rem;
+    color: #000;
+}
+
+.dataTables_paginate .paginate_button {
+    font-weight: 400;
+    font-size: .85rem;
+    color: #000;
+}
+/* End for datatable */
+.jaoas-create-button {
+    width: 110px;
+    height: 35px;
+    padding: 5px 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-shrink: 0;
+    border-radius: 5px;
+    border: 1px solid #C4C5C8;
+    background: #4A65AE;
+    color: #FFF;
+    font-family: Inter;
+    font-size: .7rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 20px;
+    text-transform: uppercase;
+    text-decoration: none;
+}
+
+.jaoas-export-button {
+    background: #0F9C4A;
+    width: 110px;
+    height: 35px;
+    padding: 5px 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-shrink: 0;
+    border-radius: 5px;
+    border: 1px solid #C4C5C8;
+    color: #FFF;
+    font-family: Inter;
+    font-size: .7rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 20px;
+    text-transform: uppercase;
+    text-decoration: none;
+}
+
+.jaoas-filter-button,
+.jaoas-filter-button:focus {
+    outline: none;
+    border: none;
+    box-shadow: none;
+    margin: 0px;
+    padding: 0px;
+    background: transparent;
+}
+
+    .jaoas-filter-button img {
+        height: 35px;
+        width: 35px;
+    }
+
+.add-icon {
+    font-size: .9rem;
+}
+
+.jaoas-create-button:hover,
+.jaoas-create-button:active,
+.jaoas-create-button:focus {
+    background-color: #4A65AE;
+    border-color: #3b758e;
+    text-decoration: none;
+    color: #fff;
+}
+
+.jaoas-export-button:hover,
+.jaoas-export-button:active,
+.jaoas-export-button:focus {
+    background-color: #0F9C4A;
+    border-color: #3b758e;
+    text-decoration: none;
+    color: #fff;
+}
+
+.export-icon {
+    width: 19px;
+}
+
+
+.jaoas-filter-modal .modal-content {
+    max-height: 380px !important;
+    border-radius: 10px;
+    font-size: 0.8rem;
+}
+
+.jaoas-filter-modal .modal-header {
+    padding: .5rem 1rem;
+    margin: 0px;
+    border: none;
+}
+
+.jaoas-filter-title {
+    color: var(--gray-900, #171C26);
+    font-size: .95rem;
+    font-weight: 700;
+}
+
+.jaoas-filter-modal .btn-close {
+    background: none;
+    color: #171C26;
+    outline: none;
+}
+
+.select2-container--open {
+    z-index: 9999999;
+}
+
+.jaoas-reset-button {
+    display: flex;
+    padding: 3px 15px;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    border-radius: 6px;
+    border: 1px solid #fff;
+    background: var(--White, #FFF);
+    /* sd-button/default */
+    box-shadow: 0px 0px 0px 1px rgba(70, 79, 96, 0.16), 0px 1px 1px 0px rgba(0, 0, 0, 0.10);
+}
+
+    .jaoas-reset-button:hover {
+        color: #000;
+        font-weight: 600;
+        box-shadow: 0px 0px 0px 1px rgba(70, 79, 96, 0.16), 0px 1px 1px 0px rgba(0, 0, 0, 0.30);
+    }
+
+.jaoas-apply-button {
+    display: flex;
+    padding: 3px 15px;
+    color: #fff;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    background: #4A65AE;
+    opacity: .9;
+    box-shadow: 0px 0px 0px 1px #5E5ADB, 0px 1px 1px 0px rgba(0, 0, 0, 0.10);
+}
+
+    .jaoas-apply-button:hover {
+        opacity: 1;
+    }
