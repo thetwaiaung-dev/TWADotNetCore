@@ -38,7 +38,7 @@ namespace TWADotNetCore.MinimalApi.features.Blog
                 {
                     IsSuccess = blog != null,
                     Message = blog != null ? "Success" : "Failed",
-                    Data = blog
+                    Data = blog!
                 });
             })
             .WithName("GetBlog")
@@ -48,18 +48,27 @@ namespace TWADotNetCore.MinimalApi.features.Blog
 
             #region CreateBlog
 
-            app.MapPost("/blog", async ([FromServices] AppDbContext db, BlogModel blog) =>
+            app.MapPost("/blog", async ([FromServices] AppDbContext db, BlogModel blog,
+                                [FromServices] ILogger<Program> _logger) =>
             {
-                await db.Blogs.AddAsync(blog);
-                int result = await db.SaveChangesAsync();
-
-                string message = result > 0 ? "Saving Successful." : "Saving Failed.";
-                return Results.Ok(new BlogResponseModel
+                try
                 {
-                    Message = message,
-                    IsSuccess = result > 0,
-                    Data = blog
-                });
+                    await db.Blogs.AddAsync(blog);
+                    int result = await db.SaveChangesAsync();
+
+                    string message = result > 0 ? "Saving Successful." : "Saving Failed.";
+                    return Results.Ok(new BlogResponseModel
+                    {
+                        Message = message,
+                        IsSuccess = result > 0,
+                        Data = blog
+                    });
+                }
+                catch (Exception e)
+                {
+                    _logger.LogError("Something was wrong in saving Blog => {@e}", e);
+                    throw new Exception(e.Message);
+                }
             })
             .WithName("CreateBlog")
             .WithOpenApi();
@@ -68,27 +77,36 @@ namespace TWADotNetCore.MinimalApi.features.Blog
 
             #region Updateblog
 
-            app.MapPut("/blog/{id}", async ([FromServices] AppDbContext db, int id, BlogModel blog) =>
+            app.MapPut("/blog/{id}", async ([FromServices] AppDbContext db, int id, BlogModel blog,
+                                            [FromServices] ILogger<Program> _logger) =>
             {
-                BlogResponseModel model = new BlogResponseModel();
-                var item = await db.Blogs.Where(x => x.Blog_Id == id).FirstOrDefaultAsync();
-
-                if (item is null)
+                try
                 {
-                    model.IsSuccess = false;
-                    model.Message = "Data not found";
+                    BlogResponseModel model = new BlogResponseModel();
+                    var item = await db.Blogs.Where(x => x.Blog_Id == id).FirstOrDefaultAsync();
+
+                    if (item is null)
+                    {
+                        model.IsSuccess = false;
+                        model.Message = "Data not found";
+                        return Results.Ok(model);
+                    }
+
+                    item.Blog_Title = blog.Blog_Title;
+                    item.Blog_Author = blog.Blog_Author;
+                    item.Blog_Content = blog.Blog_Content;
+                    int result = await db.SaveChangesAsync();
+
+                    model.IsSuccess = result > 0;
+                    model.Message = result > 0 ? "Update Successful." : "Update Failed.";
+                    model.Data = item;
                     return Results.Ok(model);
                 }
-
-                item.Blog_Title = blog.Blog_Title;
-                item.Blog_Author = blog.Blog_Author;
-                item.Blog_Content = blog.Blog_Content;
-                int result = await db.SaveChangesAsync();
-
-                model.IsSuccess = result > 0;
-                model.Message = result > 0 ? "Update Successful." : "Update Failed.";
-                model.Data = item;
-                return Results.Ok(model);
+                catch(Exception e)
+                {
+                    _logger.LogError("Something was wrong in updating Blog => {@e}", e);
+                    throw new Exception(e.Message);
+                }
             })
             .WithName("UpdateBlog")
             .WithOpenApi();

@@ -15,6 +15,8 @@ using TWADotNetCore.MVC.AppDbContext;
 using TWADotNetCore.MVC.Interfaces;
 using TWADotNetCore.MVC.Services;
 using Refit;
+using Serilog;
+using TWADotNetCore.MVC.Helpers;
 
 namespace TWADotNetCore.MVC
 {
@@ -62,6 +64,7 @@ namespace TWADotNetCore.MVC
 
             services.AddTransient<ReportService>();
             services.AddTransient<BlogService>();
+            services.AddTransient<LogHelper>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -79,6 +82,15 @@ namespace TWADotNetCore.MVC
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+
+            #region Logging
+            app.UseSerilogRequestLogging();
+
+            Log.Logger = new LoggerConfiguration()
+                                .WriteTo.File("D:/MVCLogs/MVCLog.txt", rollingInterval: RollingInterval.Hour)
+                                .CreateLogger();
+
+            #endregion
 
             app.UseRouting();
 

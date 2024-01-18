@@ -1,11 +1,15 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Serilog;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json;
 using System.Threading.Tasks;
 using TWADotNetCore.MVC.AppDbContext;
 using TWADotNetCore.MVC.Dtos;
+using TWADotNetCore.MVC.Helpers;
 using TWADotNetCore.MVC.Models;
 
 namespace TWADotNetCore.MVC.Controllers
@@ -13,10 +17,12 @@ namespace TWADotNetCore.MVC.Controllers
     public class BlogController : Controller
     {
         private readonly BlogDbContext _context;
+        private readonly LogHelper _logHelper;
 
-        public BlogController(BlogDbContext context)
+        public BlogController(BlogDbContext context, LogHelper logHelper)
         {
             _context = context;
+            _logHelper = logHelper;
         }
 
         public async Task<IActionResult> Index(int pageNo = 1, int pageSize = 10)
@@ -38,7 +44,7 @@ namespace TWADotNetCore.MVC.Controllers
             BlogListResponseModel model = new BlogListResponseModel()
             {
                 BlogList = lst,
-                PageSetting=pageSetting
+                PageSetting = pageSetting
             };
 
             return View(model);
@@ -59,7 +65,14 @@ namespace TWADotNetCore.MVC.Controllers
 
             BlogModel blog = ChangeModel.Change(dto);
 
-            await _context.Blogs.AddAsync(blog);
+            try
+            {
+                await _context.Blogs.AddAsync(blog);
+            }
+            catch(Exception e)
+            {
+                _logHelper.Error("Something was wrong in saving Blog => "+e.Message);
+            }
             var result = await _context.SaveChangesAsync();
 
             TempData["IsSuccess"] = result > 0;

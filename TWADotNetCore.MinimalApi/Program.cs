@@ -1,41 +1,64 @@
 using Microsoft.EntityFrameworkCore;
+using Serilog;
 using System.Text.Json.Serialization;
 using TWADotNetCore.MinimalApi;
 using TWADotNetCore.MinimalApi.features.Blog;
 
-var builder = WebApplication.CreateBuilder(args);
+Log.Logger = new LoggerConfiguration()
+                    .WriteTo.Console()
+                    .WriteTo.File("logs/apiLog.txt", rollingInterval: RollingInterval.Hour)
+                    .CreateLogger();
 
-// Add services to the container.
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-
-//ignore json case property
-builder.Services.ConfigureHttpJsonOptions(opt =>
+try
 {
-    opt.SerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
-    opt.SerializerOptions.PropertyNamingPolicy = null;
-});
+    Log.Information("Application Started...");
+    var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddDbContext<AppDbContext>(opt =>
-{
-    opt.UseSqlServer(builder.Configuration.GetConnectionString("DbConnection"));
-},
-ServiceLifetime.Transient,
-ServiceLifetime.Transient);
+    builder.Host.UseSerilog();
 
-var app = builder.Build();
+    // Add services to the container.
+    // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+    builder.Services.AddEndpointsApiExplorer();
+    builder.Services.AddSwaggerGen();
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    //ignore json case property
+    builder.Services.ConfigureHttpJsonOptions(opt =>
+    {
+        opt.SerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
+        opt.SerializerOptions.PropertyNamingPolicy = null;
+    });
+
+    builder.Services.AddDbContext<AppDbContext>(opt =>
+    {
+        opt.UseSqlServer(builder.Configuration.GetConnectionString("DbConnection"));
+    },
+    ServiceLifetime.Transient,
+    ServiceLifetime.Transient);
+
+    var app = builder.Build();
+
+    // Configure the HTTP request pipeline.
+    if (app.Environment.IsDevelopment())
+    {
+        app.UseSwagger();
+        app.UseSwaggerUI();
+    }
+
+    app.UseSerilogRequestLogging();
+
+    app.UseHttpsRedirection();
+
+    app.AddBlogService();
+
+    app.Run();
+
 }
-
-app.UseHttpsRedirection();
-
-app.AddBlogService();
-
-app.Run();
+catch (Exception e)
+{
+    Log.Fatal("Application terminated . The Error is => {@e}", e);
+}
+finally
+{
+    Log.CloseAndFlush();
+}
 
