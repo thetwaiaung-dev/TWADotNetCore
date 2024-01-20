@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Serilog;
+using Serilog.Sinks.MSSqlServer;
 using System.Text.Json.Serialization;
 using TWADotNetCore.MinimalApi;
 using TWADotNetCore.MinimalApi.features.Blog;
@@ -7,6 +8,14 @@ using TWADotNetCore.MinimalApi.features.Blog;
 Log.Logger = new LoggerConfiguration()
                     .WriteTo.Console()
                     .WriteTo.File("logs/apiLog.txt", rollingInterval: RollingInterval.Hour)
+                    .WriteTo
+                        .MSSqlServer(
+                                connectionString: "Data Source=.;Initial Catalog=AHMTZDotNetCore;User ID=sa;Password=thetwaiaung;TrustServerCertificate=True;",
+                                sinkOptions: new MSSqlServerSinkOptions
+                                {
+                                    TableName = "LogEvents",
+                                    AutoCreateSqlTable = true,
+                                })
                     .CreateLogger();
 
 try
