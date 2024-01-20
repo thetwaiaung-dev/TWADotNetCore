@@ -21,7 +21,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TWADotNetCore.LoginWebApp",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TWADotNetCore.ShoppingCartMvcApp", "TWADotNetCore.ShoppingCartMvcApp\TWADotNetCore.ShoppingCartMvcApp.csproj", "{81F0F725-9763-4464-91E0-F7A3183B7B44}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TWADotNetCore.SignalRChatApp", "TWADotNetCore.SignalRChatApp\TWADotNetCore.SignalRChatApp.csproj", "{45DE068B-5B17-485C-A880-49700619F9B8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TWADotNetCore.SignalRChatApp", "TWADotNetCore.SignalRChatApp\TWADotNetCore.SignalRChatApp.csproj", "{45DE068B-5B17-485C-A880-49700619F9B8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TWADotNetCore.Log4NetRestApi", "TWADotNetCore.Log4NetRestApi\TWADotNetCore.Log4NetRestApi.csproj", "{BE05E142-A354-4D0B-AB9D-77F09B34A528}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -69,6 +71,10 @@ Global
 		{45DE068B-5B17-485C-A880-49700619F9B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{45DE068B-5B17-485C-A880-49700619F9B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{45DE068B-5B17-485C-A880-49700619F9B8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BE05E142-A354-4D0B-AB9D-77F09B34A528}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BE05E142-A354-4D0B-AB9D-77F09B34A528}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BE05E142-A354-4D0B-AB9D-77F09B34A528}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BE05E142-A354-4D0B-AB9D-77F09B34A528}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
