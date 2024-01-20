@@ -2,6 +2,7 @@ using AspNetCoreRateLimit;
 using Microsoft.AspNetCore.RateLimiting;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
+using Serilog.Sinks.MSSqlServer;
 using System.Text.Json;
 using System.Threading.RateLimiting;
 using TWADotNetCore.RestApi;
@@ -12,6 +13,14 @@ string logFilePath = "D:/TWADotNetCoreLogs/" + Dev.GetProjectName() + ".txt";
 Log.Logger = new LoggerConfiguration()
                     .WriteTo.Console()
                     .WriteTo.File(logFilePath, rollingInterval: RollingInterval.Hour)
+                    .WriteTo
+                        .MSSqlServer(
+                                connectionString: "Data Source=.;Initial Catalog=AHMTZDotNetCore;User ID=sa;Password=thetwaiaung;TrustServerCertificate=True;",
+                                sinkOptions: new MSSqlServerSinkOptions
+                                {
+                                    TableName = "LogEvents",
+                                    AutoCreateSqlTable = true,
+                                })
                     .CreateLogger();
 try
 {
