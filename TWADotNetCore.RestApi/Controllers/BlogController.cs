@@ -7,6 +7,7 @@ using TWADotNetCore.RestApi.EFCoreExamples;
 using TWADotNetCore.RestApi.Models;
 using TWADotNetCore.RestApi.LimitRequests;
 using Microsoft.AspNetCore.RateLimiting;
+using Serilog;
 
 namespace TWADotNetCore.RestApi.Controllers
 {
@@ -59,36 +60,54 @@ namespace TWADotNetCore.RestApi.Controllers
         [HttpGet("{id}")]
         public IActionResult GetBlog(int id)
         {
-            var blog = _db.Blogs.Where(b => b.Blog_Id == id).FirstOrDefault();
+            try
+            {
+                Log.Information("Get Blog with Id = {@id}", id);
+                var blog = _db.Blogs.Where(b => b.Blog_Id == id).FirstOrDefault();
 
-            BlogResponseModel data = new BlogResponseModel();
-            if (blog is null)
-            {   
-                data.IsSuccess = false;
-                data.Message = "No data found";
-                return NotFound(data);
+                BlogResponseModel data = new BlogResponseModel();
+                if (blog is null)
+                {
+                    data.IsSuccess = false;
+                    data.Message = "No data found";
+                    return NotFound(data);
+                }
+
+                data.IsSuccess = true;
+                data.Message = "Success";
+                data.Data = blog;
+                Log.Information("Successful in GetBlog => {@blog}",blog);
+                return Ok(data);
             }
-
-            data.IsSuccess = true;
-            data.Message = "Success";
-            data.Data = blog;
-            return Ok(data);
+            catch (Exception e)
+            {
+                Log.Error("There was something wrong in GetBlog => {@e}", e.Message);
+                throw new Exception(e.Message);
+            }
         }
 
-        [HttpPost]  
+        [HttpPost]
         public IActionResult Create([FromBody] BlogModel blog)
         {
-            _db.Blogs.Add(blog);
-            var result = _db.SaveChanges();
-
-            string message = result > 0 ? "Saving Success" : "Saving Failed.";
-
-            BlogResponseModel data = new BlogResponseModel()
+            try
             {
-                IsSuccess = result > 0,
-                Message = message,
-            };
-            return Ok(data);
+                _db.Blogs.Add(blog);
+                var result = _db.SaveChanges();
+
+                string message = result > 0 ? "Saving Success" : "Saving Failed.";
+
+                BlogResponseModel data = new BlogResponseModel()
+                {
+                    IsSuccess = result > 0,
+                    Message = message,
+                };
+                return Ok(data);
+            }
+            catch (Exception e)
+            {
+                Log.Error("There was something wrong in saving Blog =>{@e}", e.Message);
+                throw new Exception(e.Message);
+            }
         }
 
         [HttpPut("{id}")]
