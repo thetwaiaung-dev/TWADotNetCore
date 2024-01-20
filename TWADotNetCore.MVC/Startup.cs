@@ -17,6 +17,7 @@ using TWADotNetCore.MVC.Services;
 using Refit;
 using Serilog;
 using TWADotNetCore.MVC.Helpers;
+using Serilog.Sinks.MSSqlServer;
 
 namespace TWADotNetCore.MVC
 {
@@ -83,11 +84,19 @@ namespace TWADotNetCore.MVC
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
-            #region Logging
+            #region Serilog
             app.UseSerilogRequestLogging();
 
             Log.Logger = new LoggerConfiguration()
                                 .WriteTo.File("D:/MVCLogs/MVCLog.txt", rollingInterval: RollingInterval.Hour)
+                                .WriteTo
+                                .MSSqlServer(
+                                        connectionString: "Data Source=.;Initial Catalog=AHMTZDotNetCore;User ID=sa;Password=thetwaiaung;TrustServerCertificate=True;",
+                                        sinkOptions: new MSSqlServerSinkOptions
+                                        {
+                                            TableName = "LogEvents",
+                                            AutoCreateSqlTable = true,
+                                        })
                                 .CreateLogger();
 
             #endregion
