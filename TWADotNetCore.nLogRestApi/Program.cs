@@ -21,7 +21,7 @@ var logger = NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
 //databaseTarget.Parameters.Add(new DatabaseParameterInfo("@Message", "${message}"));
 try
 {
-    logger.Info("Application started...");
+    logger.Info("Nlog Rest Api Application started...");
 
     var builder = WebApplication.CreateBuilder(args);
 
@@ -67,7 +67,7 @@ try
 }
 catch (Exception e)
 {
-    logger.Error("Application started fail..");
+    logger.Error("Application started fail.. => {e}",e.Message);
 }
 
 internal record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
