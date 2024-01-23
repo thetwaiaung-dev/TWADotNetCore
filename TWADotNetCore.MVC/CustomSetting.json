@@ -1,0 +1,6 @@
+{
+  "CustomSetting": {
+    "RestApiUrl": "https://localhost:7001",
+    "Name":  "BlogMVC"
+  }
+}

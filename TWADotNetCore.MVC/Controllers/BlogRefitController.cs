@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 using Refit;
 using System.Threading.Tasks;
 using TWADotNetCore.MVC.Dtos;
@@ -10,14 +11,18 @@ namespace TWADotNetCore.MVC.Controllers
     public class BlogRefitController : Controller
     {
         private readonly IBlogApi _blogApi;
+        private readonly CustomAppSettingModel _setting;
 
-        public BlogRefitController(IBlogApi blogApi)
+        public BlogRefitController(IBlogApi blogApi, IOptionsMonitor<CustomAppSettingModel> setting)
         {
             _blogApi = blogApi;
+            _setting = setting.CurrentValue;
         }
 
         public async Task<IActionResult> Index()
         {
+            var restApiUrl = _setting.RestApiUrl;
+            var name = _setting.Name;
             var model = await _blogApi.GetBlogs();
             return View("~/Views/BlogHttpClient/Index.cshtml", model);
         }

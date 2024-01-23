@@ -22,6 +22,9 @@ try
     });
     #endregion
 
+    #region Injection
+
+    #endregion
     var app = builder.Build();
 
     // Configure the HTTP request pipeline.
@@ -50,7 +53,7 @@ try
 }
 catch (Exception e)
 {
-    Log.Fatal("Application terminated . The Error is => {@e}", e);
+    Log.Fatal("Application terminated . The Error is => {@e}", e.Message);
 }
 finally
 {

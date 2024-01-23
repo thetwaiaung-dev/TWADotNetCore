@@ -1,10 +1,10 @@
 using log4net;
-using System.Reflection;
 using log4net.Config;
+using Microsoft.AspNetCore.Mvc;
+using System.Reflection;
 
 try
 {
-
     #region log4Net
     var log4NetRepository = LogManager.GetRepository(Assembly.GetEntryAssembly());
     XmlConfigurator.Configure(log4NetRepository, new FileInfo("log4net.config"));
@@ -39,15 +39,24 @@ try
 
     app.MapGet("/weatherforecast", () =>
     {
-        var forecast = Enumerable.Range(1, 5).Select(index =>
-            new WeatherForecast
-            (
-                DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-                Random.Shared.Next(-20, 55),
-                summaries[Random.Shared.Next(summaries.Length)]
-            ))
-            .ToArray();
-        return forecast;
+        try
+        {
+            log.Info("Weater Data is started...");
+            var forecast = Enumerable.Range(1, 5).Select(index =>
+                new WeatherForecast
+                (
+                    DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
+                    Random.Shared.Next(-20, 55),
+                    summaries[Random.Shared.Next(summaries.Length)]
+                ))
+                .ToArray();
+            return forecast;
+        }
+        catch (Exception e)
+        {
+            log.Error("There was something wrong in => {e}", e);
+            throw new Exception(e.Message);
+        }
     })
     .WithName("GetWeatherForecast")
     .WithOpenApi();

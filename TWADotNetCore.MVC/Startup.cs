@@ -18,6 +18,9 @@ using Refit;
 using Serilog;
 using TWADotNetCore.MVC.Helpers;
 using Serilog.Sinks.MSSqlServer;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
+using TWADotNetCore.MVC.Models;
 
 namespace TWADotNetCore.MVC
 {
@@ -58,14 +61,26 @@ namespace TWADotNetCore.MVC
             #region Refit
 
             services
-            .AddRefitClient<IBlogApi>()
+            .AddRefitClient<IBlogApi>(
+                new RefitSettings(new NewtonsoftJsonContentSerializer
+                (new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver() }))
+                )
             .ConfigureHttpClient(c => c.BaseAddress = new Uri(Configuration.GetSection("RestApiUrl").Value));
 
             #endregion
 
+            #region Custom Setting from json
+
+            services.AddOptions();
+            services.Configure<CustomAppSettingModel>(Configuration.GetSection("CustomSetting"));
+
+            #endregion
+
+            #region Injection
             services.AddTransient<ReportService>();
             services.AddTransient<BlogService>();
             services.AddTransient<LogHelper>();
+            #endregion
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -89,14 +104,14 @@ namespace TWADotNetCore.MVC
 
             Log.Logger = new LoggerConfiguration()
                                 .WriteTo.File("D:/MVCLogs/MVCLog.txt", rollingInterval: RollingInterval.Hour)
-                                .WriteTo
-                                .MSSqlServer(
-                                        connectionString: "Data Source=.;Initial Catalog=AHMTZDotNetCore;User ID=sa;Password=thetwaiaung;TrustServerCertificate=True;",
-                                        sinkOptions: new MSSqlServerSinkOptions
-                                        {
-                                            TableName = "LogEvents",
-                                            AutoCreateSqlTable = true,
-                                        })
+                                //.WriteTo
+                                //.MSSqlServer(
+                                //        connectionString: "Data Source=.;Initial Catalog=AHMTZDotNetCore;User ID=sa;Password=thetwaiaung;TrustServerCertificate=True;",
+                                //        sinkOptions: new MSSqlServerSinkOptions
+                                //        {
+                                //            TableName = "LogEvents",
+                                //            AutoCreateSqlTable = true,
+                                //        })
                                 .CreateLogger();
 
             #endregion
