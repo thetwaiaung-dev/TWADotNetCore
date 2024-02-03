@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using TWADotNetCore.ShoppingCartMvcApp.Models;
+using TWADotNetCore.ShoppingCartMvcApp.Models.DataModels;
 
 namespace TWADotNetCore.ShoppingCartMvcApp
 {

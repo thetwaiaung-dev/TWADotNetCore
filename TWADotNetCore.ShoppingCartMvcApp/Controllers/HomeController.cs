@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using System.Diagnostics;
 using TWADotNetCore.ShoppingCartMvcApp.Models;
+using TWADotNetCore.ShoppingCartMvcApp.Models.ViewModels;
 
 namespace TWADotNetCore.ShoppingCartMvcApp.Controllers
 {
@@ -15,6 +17,11 @@ namespace TWADotNetCore.ShoppingCartMvcApp.Controllers
 
         public IActionResult Index()
         {
+            List<ProductViewModel> products = new();
+            using StreamReader reader = new("product.json");
+            var productJson = reader.ReadToEnd();
+            products = JsonConvert.DeserializeObject<List<ProductViewModel>>(productJson);
+
             return View();
         }
 

@@ -13,7 +13,7 @@ try
 
     // Add services to the container.
     builder.Services.AddControllersWithViews();
-    builder.Host.UseSerilog();
+   // builder.Host.UseSerilog();
 
     #region DbContext Connection
     builder.Services.AddDbContext<AppDbContext>(opt =>
@@ -38,7 +38,7 @@ try
     app.UseHttpsRedirection();
     app.UseStaticFiles();
 
-    app.UseSerilogRequestLogging();
+    //app.UseSerilogRequestLogging();
 
     app.UseRouting();
 
